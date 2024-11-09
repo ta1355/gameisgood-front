@@ -36,13 +36,13 @@ function GameList({
 
         <div className={styles.game__platforms}>
           <p className={styles.game__platform}>
-            Windows: {windowsAvailable ? "가능" : "불가"}
+            Windows: {windowsAvailable ? "실행 가능" : "실행 불가"}
           </p>
           <p className={styles.game__platform}>
-            Mac: {macAvailable ? "가능" : "불가"}
+            Mac: {macAvailable ? "실행 가능" : "실행 불가"}
           </p>
           <p className={styles.game__platform}>
-            Linux: {linuxAvailable ? "가능" : "불가"}
+            Linux: {linuxAvailable ? "실행 가능" : "실행 불가"}
           </p>
         </div>
 
