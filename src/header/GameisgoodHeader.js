@@ -2,8 +2,6 @@ import { useState } from "react";
 import styles from "./Header.module.css";
 
 function Header() {
-  const [loading, setLoading] = useState(true);
-
   return (
     <div>
       <nav className={`navbar navbar-expand-lg ${styles.navbar}`}>

@@ -1,0 +1,87 @@
+/* GameList.module.css */
+
+.game {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  margin: 20px;
+  background-color: #76c7c0; /* 하늘색 배경 */
+  color: #34495e; /* 어두운 회색 텍스트 */
+  font-family: "Arial", sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.game__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.game__details {
+  padding: 15px;
+}
+
+.game__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.game__headline {
+  font-style: italic;
+  color: #a9d6e5; /* 연한 하늘색 텍스트 */
+  margin-bottom: 15px;
+}
+
+.game__price {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.game__price span {
+  color: #f39c12; /* 노란색 가격 강조 */
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.game__discount {
+  color: #e74c3c; /* 할인 정보 빨간색 */
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 5px;
+}
+
+.game__platforms {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.game__platform {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.game__link {
+  text-align: center;
+  padding: 10px;
+  background-color: #5dade2; /* 밝은 파란색 버튼 */
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-top: 10px;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.game__link:hover {
+  background-color: #3498db; /* hover 시 푸른색 강조 */
+}
