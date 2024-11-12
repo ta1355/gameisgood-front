@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GameList from "./../list/Gamelist";
+import GameList from "../list/Gamelist";
 import styles from "./Game.module.css";
 
 function Game() {
