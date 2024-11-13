@@ -3,7 +3,7 @@ import styles from "./GameDetail.module.css"; // CSS 모듈 import
 
 function Detail() {
   const [loading, setLoading] = useState(true);
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState([]);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
 
