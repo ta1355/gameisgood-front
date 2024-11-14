@@ -102,7 +102,7 @@ function Header() {
               <input
                 className={`form-control me-2 ${styles.formControl}`}
                 type="search"
-                placeholder="Search"
+                placeholder="게임 검색"
                 aria-label="Search"
               />
               <button
