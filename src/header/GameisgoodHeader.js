@@ -1,7 +1,18 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // useNavigate 훅 import
 import styles from "./Header.module.css";
 
 function Header() {
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault(); // 기본 폼 제출 동작 막기
+    if (searchQuery) {
+      navigate(`/search/${searchQuery}`); // 검색어를 URL에 포함하여 라우팅
+    }
+  };
+
   return (
     <div>
       <nav className={`navbar navbar-expand-lg ${styles.navbar}`}>
@@ -92,18 +103,36 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="#"
                     >
+                      공지사항
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="#"
+                    >
+                      자유게시판
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="#"
+                    >
                       Something else here
                     </a>
                   </li>
                 </ul>
               </li>
             </ul>
-            <form className="d-flex">
+            <form className="d-flex" onSubmit={handleSearchSubmit}>
               <input
                 className={`form-control me-2 ${styles.formControl}`}
                 type="search"
                 placeholder="게임 검색"
                 aria-label="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 className={`btn btn-outline-success ${styles.btnOutlineSuccess}`}

@@ -1,0 +1,104 @@
+/* 전체 페이지 배경 색상 */
+.searchContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  color: rgb(0, 0, 0); /* 텍스트 색상 기본 흰색 */
+  background-color: #ecf0f1; /* 밝은 회색 배경 */
+  min-height: 100vh;
+  margin: 0 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* 로딩 텍스트 */
+.loadingText {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 검색 결과가 없을 때의 메시지 */
+.noResultsMessage {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #777;
+  margin-top: 20px;
+}
+
+/* 게임 리스트 컨테이너: 각 게임 카드가 세로로 한 줄씩 배치됨 */
+.gameList {
+  display: flex;
+  flex-direction: column; /* 카드들이 세로로 배치되도록 설정 */
+  gap: 20px; /* 카드 간의 간격 */
+  margin-top: 20px;
+}
+
+/* 각 게임 카드 */
+.gameCard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* 카드가 화면 너비를 꽉 채우도록 설정 */
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px; /* 내부 요소 간 간격 */
+}
+
+/* 게임 로고 이미지 */
+.gameLogo {
+  width: 100%;
+  height: auto;
+  max-width: 200px; /* 원하는 최대 너비로 설정 */
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* 게임 제목 */
+.gameTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+/* 숨기고 싶은 요소 (appid, icon) */
+.hidden {
+  display: none;
+}
+
+/* 검색 입력 폼 */
+.searchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* 검색 입력 필드 */
+.searchInput {
+  width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+/* 검색 버튼 */
+.searchButton {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #2980b9;
+}
