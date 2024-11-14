@@ -11,7 +11,7 @@ function App() {
       <Gameisgood></Gameisgood>
       <Routes>
         <Route path="/" element={<Game />}></Route>
-        <Route path="/test" element={<GameDetail />}></Route>
+        <Route path="/test/:steamAppId" element={<GameDetail />} />
       </Routes>
       <Footer></Footer>
     </Router>

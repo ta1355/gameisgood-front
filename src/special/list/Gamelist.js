@@ -46,7 +46,7 @@ function GameList({
           </p>
         </div>
 
-        <Link to={`/game/${id}`} className={styles.game__link}>
+        <Link to={`/test/${id}`} className={styles.game__link}>
           자세히 보기
         </Link>
       </div>

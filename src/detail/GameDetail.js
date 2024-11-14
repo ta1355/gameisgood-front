@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import styles from "./GameDetail.module.css"; // CSS 모듈 import
+import { useParams } from "react-router-dom";
+import styles from "./GameDetail.module.css";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState([]);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const { steamAppId } = useParams();
 
   const getGame = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/test/582010`);
+      const response = await fetch(`http://localhost:8080/test/${steamAppId}`);
       const json = await response.json();
-      console.log(json);
       setGame(json);
       setLoading(false);
     } catch (error) {
@@ -21,8 +22,10 @@ function Detail() {
   };
 
   useEffect(() => {
-    getGame();
-  }, []);
+    if (steamAppId) {
+      getGame();
+    }
+  }, [steamAppId]);
 
   const goToNextScreenshot = () => {
     if (
