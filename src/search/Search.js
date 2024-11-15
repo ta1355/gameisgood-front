@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Search.module.css"; // 스타일 모듈 임포트
 
 function Search() {
   const [loading, setLoading] = useState(true);
   const [game, setGame] = useState([]);
   const { steamAppName } = useParams();
+  const navigate = useNavigate();
 
   const getGame = async () => {
     try {
@@ -27,6 +29,10 @@ function Search() {
       getGame();
     }
   }, [steamAppName]);
+
+  const handleSearchSubmit = (appid) => {
+    navigate(`/test/${appid}`); // 게임의 appid를 이용해 상세 페이지로 이동
+  };
 
   return (
     <div className={styles.searchContainer}>
@@ -51,6 +57,12 @@ function Search() {
                     alt="게임아이콘"
                     className={styles.hidden}
                   />
+                  <button
+                    onClick={() => handleSearchSubmit(search.appid)} // 버튼 클릭 시 해당 게임의 상세 페이지로 이동
+                    className={styles.detailButton} // 스타일을 적용하기 위해 클래스 추가
+                  >
+                    자세히 보기
+                  </button>
                 </div>
               ))}
             </div>

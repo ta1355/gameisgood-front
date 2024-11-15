@@ -41,12 +41,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%; /* 카드가 화면 너비를 꽉 채우도록 설정 */
-  text-align: center;
+  text-align: left; /* 기본 텍스트 정렬을 왼쪽으로 설정 */
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  flex-direction: row; /* 가로로 배치 */
+  align-items: center; /* 세로 정렬 */
   gap: 15px; /* 내부 요소 간 간격 */
+  position: relative; /* 버튼을 우측 끝에 배치하기 위해 position 사용 */
 }
 
 /* 게임 로고 이미지 */
@@ -71,34 +71,19 @@
   display: none;
 }
 
-/* 검색 입력 폼 */
-.searchForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-/* 검색 입력 필드 */
-.searchInput {
-  width: 300px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-right: 10px;
-}
-
-/* 검색 버튼 */
-.searchButton {
+/* "자세히 보기" 버튼 스타일 */
+.detailButton {
+  position: absolute; /* 절대 위치로 설정하여 버튼을 우측 끝에 배치 */
+  right: 20px; /* 우측 끝에서 20px 여유 */
   padding: 10px 20px;
   background-color: #3498db;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.searchButton:hover {
+.detailButton:hover {
   background-color: #2980b9;
 }
