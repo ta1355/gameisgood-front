@@ -7,16 +7,21 @@ function Detail() {
   const [game, setGame] = useState([]);
   const [currentScreenshotIndex, setCurrentScreenshotIndex] = useState(0);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [error, setError] = useState(null); // 오류 상태 추가
   const { steamAppId } = useParams();
 
   const getGame = async () => {
     try {
       const response = await fetch(`http://localhost:8080/test/${steamAppId}`);
+      if (!response.ok) {
+        throw new Error("네트워크 오류 또는 데이터 로드 실패");
+      }
       const json = await response.json();
       setGame(json);
       setLoading(false);
     } catch (error) {
       console.error("데이터 로딩 실패:", error);
+      setError("페이지 오류입니다."); // 에러 발생 시 오류 메시지 설정
       setLoading(false);
     }
   };
@@ -58,6 +63,8 @@ function Detail() {
     <div className={styles.detailContainer}>
       {loading ? (
         <h1 className={styles.loadingText}>로딩중...</h1>
+      ) : error ? (
+        <h1 className={styles.errorText}>{error}</h1> // 에러 메시지 표시
       ) : (
         <div className={styles.gameDetails}>
           {game ? (

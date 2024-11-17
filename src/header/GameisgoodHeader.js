@@ -39,12 +39,17 @@ function Header() {
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="/"
+                  style={{ color: "white" }}
+                >
                   홈
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="#" style={{ color: "white" }}>
                   로그인
                 </a>
               </li>
@@ -56,6 +61,7 @@ function Header() {
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  style={{ color: "white" }}
                 >
                   메뉴
                 </a>
@@ -82,9 +88,9 @@ function Header() {
                   <li>
                     <a
                       className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
+                      href="/special"
                     >
-                      기타
+                      특별할인
                     </a>
                   </li>
                   <li>
