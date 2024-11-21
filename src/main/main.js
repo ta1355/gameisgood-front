@@ -1,5 +1,13 @@
+import React, { useEffect, useState } from "react";
+
 function Main() {
-  return <div>메인 페이지임</div>;
+  const [messages, setMessages] = useState([]);
+
+  return (
+    <div>
+      <h2>채팅</h2>
+    </div>
+  );
 }
 
 export default Main;

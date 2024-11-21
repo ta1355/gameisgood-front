@@ -17,7 +17,7 @@ function Header() {
     <div>
       <nav className={`navbar navbar-expand-lg ${styles.navbar}`}>
         <div className="container-fluid">
-          <a className={styles.navbarBrand} href="#">
+          <a className={styles.navbarBrand} href="/">
             GameisGood
           </a>
           <button
