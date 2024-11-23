@@ -1,0 +1,37 @@
+/* 전체 페이지 배경 색상 */
+.postListContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+  color: #ecf0f1; /* 기본 텍스트 색상 흰색 */
+  background-color: #34495e; /* 어두운 배경 */
+  min-height: 100vh;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 부드러운 그림자 */
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* 로딩 텍스트 */
+.loadingText {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  color: #ecf0f1; /* 흰색 텍스트 */
+}
+
+/* 검색 결과가 없을 때의 메시지 */
+.noResultsMessage {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #bdc3c7; /* 연한 회색 텍스트 */
+  margin-top: 20px;
+}
+
+/* 게임 리스트 컨테이너 */
+.gameList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 카드 간의 간격 */
+  margin-top: 20px;
+}

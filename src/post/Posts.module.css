@@ -1,0 +1,66 @@
+/* 각 포스트 컨테이너 */
+.post {
+  background-color: #434547; /* 어두운 청록색 배경 */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  width: 100%; /* 화면 너비를 꽉 채우도록 */
+  text-align: left; /* 기본 텍스트 정렬 */
+  margin-bottom: 20px; /* 각 포스트 간의 간격 */
+}
+
+/* 포스트 제목 */
+.post h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ecf0f1; /* 흰색 텍스트 */
+  margin-bottom: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; /* 긴 제목을 자르기 위해 */
+}
+
+/* 포스트 내용 */
+.post p {
+  color: #bdc3c7; /* 연한 회색 텍스트 */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* 강조 텍스트 */
+.post strong {
+  color: #ecf0f1; /* 텍스트 강조를 위해 흰색으로 설정 */
+}
+
+/* 포스트 정보(게임, 추천수, 작성일 등) 가로로 배치 */
+.post-info {
+  display: flex; /* 가로로 배치 */
+  justify-content: space-between; /* 각 항목 간의 간격을 균등하게 */
+  margin-bottom: 15px; /* 아래쪽 여백 */
+  color: #bdc3c7; /* 연한 회색 */
+}
+
+.post-info p {
+  font-size: 1rem; /* 기본 폰트 크기 */
+  margin: 0; /* 간격 제거 */
+  white-space: nowrap; /* 텍스트가 한 줄로 나열되도록 */
+}
+
+.post-info strong {
+  color: #ecf0f1; /* 강조된 항목은 흰색 */
+}
+
+/* 삭제일 스타일 */
+.post-info .deletedDate {
+  font-size: 0.9rem;
+  color: #95a5a6; /* 연한 회색 */
+}
+
+/* 이미지가 있을 경우 */
+.post img {
+  margin-top: 10px;
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
