@@ -115,7 +115,7 @@ function Header() {
                   <li>
                     <a
                       className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
+                      href="/post/list"
                     >
                       자유게시판
                     </a>

@@ -1,0 +1,93 @@
+/* 전체 컨테이너 스타일 */
+.detailContainer {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  padding: 10px;
+  background-color: #2c3e50; /* 어두운 배경 색 */
+  min-height: 100vh;
+}
+
+/* 게시글 박스 스타일 */
+.postBox {
+  background-color: #34495e; /* 어두운 회색 박스 */
+  padding: 20px;
+  border-radius: 8px; /* 둥근 모서리 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 부드러운 그림자 */
+  width: 100%;
+  max-width: 1200px; /* 최대 너비 제한 */
+}
+
+/* 제목 영역 */
+.titleSection {
+  background-color: #7f8c8d; /* 게임 이름과 제목이 포함된 영역 */
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* 아래에 간격을 주기 위해 */
+}
+
+/* 제목과 게임 이름을 동일 행에 배치 */
+.titleContainer {
+  display: flex;
+  justify-content: space-between; /* 왼쪽 끝, 오른쪽 끝 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+}
+
+/* 게시글 제목 */
+.postTitle {
+  font-size: 2rem;
+  color: #ecf0f1; /* 흰색 */
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left; /* 제목을 왼쪽 정렬 */
+  margin-right: 20px; /* 게임 이름과 간격 */
+}
+
+/* 게임 이름 스타일 */
+.gameName {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50; /* 어두운 색으로 변경 */
+  text-align: right; /* 게임 이름을 우측 정렬 */
+  margin-right: 20px;
+}
+
+/* 작성일 정보 */
+.createDate {
+  font-size: 1rem;
+  color: #bdc3c7; /* 연한 회색 */
+  text-align: left; /* 중앙 정렬 */
+  margin-bottom: 20px;
+}
+
+/* 이미지 영역 */
+.imageSection {
+  background-color: #7f8c8d; /* 이미지가 포함된 영역 */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* 아래에 간격을 주기 위해 */
+}
+
+/* 게시글 이미지 */
+.postImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 50px;
+  object-position: left;
+}
+
+/* 게시글 상세 내용 영역 */
+.detailSection {
+  background-color: #95a5a6; /* 본문 내용 영역 */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px; /* 아래에 간격을 주기 위해 */
+}
+
+/* 게시글 상세 내용 */
+.postDetail {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ecf0f1;
+}

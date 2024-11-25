@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./Posts.module.css"; // CSS Module 불러오기
 
 function Posts({
@@ -12,14 +13,22 @@ function Posts({
   comments,
   game,
 }) {
+  const navigate = useNavigate();
+
   const formattedDate = new Date(createDateTime).toLocaleString();
   const formattedDeletedDate = deletedDateTime
     ? new Date(deletedDateTime).toLocaleString()
     : null;
 
+  const handleTitleClick = () => {
+    navigate(`/post/${id}`);
+  };
+
   return (
     <div className={styles.post}>
-      <h2>{title}</h2>
+      <h2 onClick={handleTitleClick} style={{ cursor: "pointer" }}>
+        {title}
+      </h2>
       <p>{detail}</p>
 
       {/* 포스트 정보 가로로 배치 */}

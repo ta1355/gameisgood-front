@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import Posts from "./Posts"; // Posts 컴포넌트 불러오기
 import styles from "./PostList.module.css"; // CSS Module 불러오기
+import { useNavigate } from "react-router-dom";
 
 function PostList() {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
 
   const getList = async () => {
     try {
@@ -23,6 +25,10 @@ function PostList() {
   useEffect(() => {
     getList();
   }, []);
+
+  const handleTitleClick = () => {
+    navigate(`/post/create`);
+  };
 
   return (
     <div className={styles.postListContainer}>
@@ -47,6 +53,9 @@ function PostList() {
               game={post.game}
             />
           ))}
+          <div className={styles.buttonContainer}>
+            <button onClick={handleTitleClick}>게시글 등록</button>
+          </div>
         </div>
       )}
     </div>

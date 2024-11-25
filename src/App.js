@@ -7,6 +7,7 @@ import GameDetail from "./steamapi/detail/GameDetail";
 import Search from "./steamapi/search/Search";
 import PostList from "./post/PostList";
 import CreatePost from "./post/CreatePost";
+import PostDetail from "./post/PostDetail";
 import Main from "./main/main";
 import "./App.css";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/search/:steamAppName" element={<Search />} />
         <Route path="post/list" element={<PostList />} />
         <Route path="post/create" element={<CreatePost />} />
+        <Route path="post/:id" element={<PostDetail />} />
       </Routes>
       <Footer></Footer>
     </Router>

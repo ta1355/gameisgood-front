@@ -34,33 +34,29 @@
 }
 
 /* 포스트 정보(게임, 추천수, 작성일 등) 가로로 배치 */
-.post-info {
+.postInfo {
   display: flex; /* 가로로 배치 */
-  justify-content: space-between; /* 각 항목 간의 간격을 균등하게 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center; /* 세로 정렬 중앙 */
+  gap: 20px; /* 항목들 간의 간격 */
   margin-bottom: 15px; /* 아래쪽 여백 */
   color: #bdc3c7; /* 연한 회색 */
+  font-size: 1rem; /* 기본 폰트 크기 */
 }
 
-.post-info p {
-  font-size: 1rem; /* 기본 폰트 크기 */
+/* 포스트 정보 항목 */
+.postInfo p {
   margin: 0; /* 간격 제거 */
   white-space: nowrap; /* 텍스트가 한 줄로 나열되도록 */
 }
 
-.post-info strong {
-  color: #ecf0f1; /* 강조된 항목은 흰색 */
+/* 강조된 항목은 흰색 */
+.postInfo strong {
+  color: #ecf0f1;
 }
 
 /* 삭제일 스타일 */
-.post-info .deletedDate {
+.postInfo .deletedDate {
   font-size: 0.9rem;
   color: #95a5a6; /* 연한 회색 */
-}
-
-/* 이미지가 있을 경우 */
-.post img {
-  margin-top: 10px;
-  max-width: 100%;
-  border-radius: 8px;
-  object-fit: contain;
 }
