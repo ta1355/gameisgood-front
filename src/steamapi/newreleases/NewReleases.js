@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GameList from "../list/Gamelist";
-import styles from "./Game.module.css";
+import GameList from "./NewReleasesList";
+import styles from "./NewReleases.module.css";
 
 function Game() {
   const [loading, setLoading] = useState(true);
@@ -8,7 +8,7 @@ function Game() {
 
   const getGame = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/game/specials`);
+      const response = await fetch(`http://localhost:8080/game/new_releases`);
       const json = await response.json();
 
       console.log(json);

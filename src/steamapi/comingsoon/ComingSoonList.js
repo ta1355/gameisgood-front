@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import styles from "./GameList.module.css";
+import styles from "./ComingSoonList.module.css";
 
 function GameList({
   id,
@@ -27,12 +27,8 @@ function GameList({
         <h2 className={styles.game__title}>{name}</h2>
         {headline && <p className={styles.game__headline}>{headline}</p>}
         <p className={styles.game__price}>
-          가격: <span>{formattedFinalPrice}</span> ({discountPercent}% 할인)
+          가격: <span>출시 예정</span>
         </p>
-
-        <div className={styles.game__discount}>
-          {discounted ? "할인 중!" : "할인 없음"}
-        </div>
 
         <div className={styles.game__platforms}>
           <p className={styles.game__platform}>

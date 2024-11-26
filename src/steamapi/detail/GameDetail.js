@@ -12,7 +12,7 @@ function Detail() {
 
   const getGame = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/test/${steamAppId}`);
+      const response = await fetch(`http://localhost:8080/game/${steamAppId}`);
       if (!response.ok) {
         throw new Error("네트워크 오류 또는 데이터 로드 실패");
       }

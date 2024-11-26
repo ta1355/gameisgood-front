@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import styles from "./GameList.module.css";
+import styles from "./NewReleasesList.module.css";
 
 function GameList({
   id,
@@ -20,6 +20,9 @@ function GameList({
   formattedOriginalPrice,
   formattedFinalPrice,
 }) {
+  const displayPrice =
+    formattedFinalPrice === "0원" ? "무료" : formattedFinalPrice;
+
   return (
     <div className={styles.game}>
       <img src={largeCapsuleImage} alt={name} className={styles.game__image} />
@@ -27,12 +30,9 @@ function GameList({
         <h2 className={styles.game__title}>{name}</h2>
         {headline && <p className={styles.game__headline}>{headline}</p>}
         <p className={styles.game__price}>
-          가격: <span>{formattedFinalPrice}</span> ({discountPercent}% 할인)
+          가격: <span>{displayPrice}</span>{" "}
+          {discountPercent > 0 && ` (${discountPercent}% 할인)`}
         </p>
-
-        <div className={styles.game__discount}>
-          {discounted ? "할인 중!" : "할인 없음"}
-        </div>
 
         <div className={styles.game__platforms}>
           <p className={styles.game__platform}>

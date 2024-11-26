@@ -72,17 +72,17 @@ function Header() {
                   <li>
                     <a
                       className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
+                      href="/top_sellers"
                     >
-                      인기순
+                      steam 인기순
                     </a>
                   </li>
                   <li>
                     <a
                       className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
+                      href="/new_releases"
                     >
-                      최신순
+                      steam 최신순
                     </a>
                   </li>
                   <li>
@@ -90,15 +90,15 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="/special"
                     >
-                      특별할인
+                      steam 특별할인
                     </a>
                   </li>
                   <li>
                     <a
                       className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
+                      href="/coming_soon"
                     >
-                      이건 뭘 해야할까
+                      steam 출시 예정
                     </a>
                   </li>
                   <li>
