@@ -5,6 +5,9 @@ import Game from "./steamapi/special/gameisgood/game";
 import Footer from "./footer/Footer";
 import GameDetail from "./steamapi/detail/GameDetail";
 import Search from "./steamapi/search/Search";
+import ComingSoon from "./steamapi/comingsoon/ComingSoon";
+import TopSellers from "./steamapi/topsellers/TopSellers";
+import NewReleases from "./steamapi/newreleases/NewReleases";
 import PostList from "./post/PostList";
 import CreatePost from "./post/CreatePost";
 import PostDetail from "./post/PostDetail";
@@ -18,7 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/special" element={<Game />} />
-        <Route path="/test/:steamAppId" element={<GameDetail />} />
+        <Route path="/coming_soon" element={<ComingSoon />} />
+        <Route path="/top_sellers" element={<TopSellers />} />
+        <Route path="/new_releases" element={<NewReleases />} />
+        <Route path="/game_detail/:steamAppId" element={<GameDetail />} />
         <Route path="/search/:steamAppName" element={<Search />} />
         <Route path="post/list" element={<PostList />} />
         <Route path="post/create" element={<CreatePost />} />
