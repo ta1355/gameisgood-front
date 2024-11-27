@@ -63,7 +63,7 @@ function Header() {
                   aria-expanded="false"
                   style={{ color: "white" }}
                 >
-                  메뉴
+                  게임 정보
                 </a>
                 <ul
                   className={`dropdown-menu ${styles.dropdownMenu}`}
@@ -74,7 +74,7 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="/top_sellers"
                     >
-                      steam 인기순
+                      인기순
                     </a>
                   </li>
                   <li>
@@ -82,7 +82,7 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="/new_releases"
                     >
-                      steam 최신순
+                      최신순
                     </a>
                   </li>
                   <li>
@@ -90,7 +90,7 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="/special"
                     >
-                      steam 특별할인
+                      특별할인
                     </a>
                   </li>
                   <li>
@@ -98,7 +98,7 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="/coming_soon"
                     >
-                      steam 출시 예정
+                      출시 예정
                     </a>
                   </li>
                   <li>
@@ -109,26 +109,19 @@ function Header() {
                       className={`dropdown-item ${styles.dropdownItem}`}
                       href="#"
                     >
-                      공지사항
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="/post/list"
-                    >
-                      자유게시판
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
-                    >
                       Something else here
                     </a>
                   </li>
                 </ul>
+              </li>
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  href="/post/list"
+                  style={{ color: "white" }}
+                >
+                  자유게시판
+                </a>
               </li>
             </ul>
             <form className="d-flex" onSubmit={handleSearchSubmit}>

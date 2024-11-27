@@ -8,6 +8,8 @@ function CreatePost() {
   const [gameTag, setGameTag] = useState("");
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
+  const maxSize = 5 * 1024 * 1024;
+  const allowedTypes = ["image/jpeg", "image/png"];
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -16,6 +18,39 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 유효성 검사
+    //공백제거후 유효성 검사
+    if (title.trim() === "") {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+
+    if (title.length > 100) {
+      alert("제목은 100자 이하로 입력해주세요.");
+      return;
+    }
+
+    if (content.trim() === "") {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+
+    if (content.length > 500) {
+      alert("내용은 500자 이하로 입력해주세요.");
+      return;
+    }
+
+    if (image && !allowedTypes.includes(image.type)) {
+      alert("JPG, PNG 형식만 업로드 가능합니다.");
+      return;
+    }
+
+    if (image && image.size > maxSize) {
+      alert("이미지 파일 크기는 5MB 이하로 업로드해주세요.");
+      return;
+    }
+
+    // 유효성 검사를 모두 통과하면 서버로 데이터 전송
     const formData = new FormData();
     formData.append("title", title);
     formData.append("detail", content);
@@ -33,8 +68,6 @@ function CreatePost() {
       if (response.ok) {
         const data = await response.json();
         alert("게시글이 성공적으로 작성되었습니다!");
-        console.log("게시글이 성공적으로 작성되었습니다.", data);
-
         navigate("/post/list");
       } else {
         alert("게시글 작성에 실패했습니다.");
