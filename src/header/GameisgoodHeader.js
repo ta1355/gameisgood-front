@@ -1,16 +1,61 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate 훅 import
+import { useNavigate } from "react-router-dom"; // useNavigate 훅 사용
+import debounce from "lodash.debounce"; // lodash.debounce 라이브러리 사용
 import styles from "./Header.module.css";
+
+// API 호출 함수 (예시)
+const fetchGames = async (query) => {
+  try {
+    const response = await fetch(`http://localhost:8080/search/${query}`);
+    const data = await response.json();
+    return data; // 예시로 게임 목록이 그대로 반환된다고 가정
+  } catch (error) {
+    console.error("API 호출 오류:", error);
+    return [];
+  }
+};
 
 function Header() {
   const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+  const [games, setGames] = useState([]); // 검색된 게임 목록
+  const [error, setError] = useState(null); // 오류 상태
   const navigate = useNavigate(); // useNavigate 훅 사용
 
+  // Debounced 검색어 입력 핸들러 (50ms로 변경)
+  const handleSearchChange = debounce(async (query) => {
+    setSearchQuery(query); // 검색어 상태 업데이트
+
+    if (query.length > 0) {
+      setError(null);
+
+      try {
+        const results = await fetchGames(query); // API 호출
+        setGames(results); // 결과 저장
+      } catch (err) {
+        setError("검색 결과를 불러오는 데 문제가 발생했습니다.");
+      }
+    } else {
+      setGames([]); // 검색어가 비어 있으면 결과 초기화
+    }
+  }, 50);
+
+  // 검색 폼 제출 처리
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // 기본 폼 제출 동작 막기
+    e.preventDefault(); // 기본 폼 제출 동작 방지
     if (searchQuery) {
       navigate(`/search/${searchQuery}`); // 검색어를 URL에 포함하여 라우팅
     }
+  };
+
+  // 실시간으로 검색어 변경 시 debounce 함수 호출
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    handleSearchChange(query);
+  };
+
+  // 게임 클릭 시 디테일 페이지로 이동
+  const handleGameClick = (appid) => {
+    navigate(`/game_detail/${appid}`); // 게임의 appid를 이용해 디테일 페이지로 이동
   };
 
   return (
@@ -20,6 +65,7 @@ function Header() {
           <a className={styles.navbarBrand} href="/">
             GameisGood
           </a>
+          {/* 네비게이션 메뉴 - 홈, 로그인, 게임 정보 등 */}
           <button
             className={`navbar-toggler ${styles.navbarToggler}`}
             type="button"
@@ -124,6 +170,7 @@ function Header() {
                 </a>
               </li>
             </ul>
+            {/* 검색 폼 */}
             <form className="d-flex" onSubmit={handleSearchSubmit}>
               <input
                 className={`form-control me-2 ${styles.formControl}`}
@@ -131,7 +178,7 @@ function Header() {
                 placeholder="게임 검색"
                 aria-label="Search"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleInputChange}
               />
               <button
                 className={`btn btn-outline-success ${styles.btnOutlineSuccess}`}
@@ -143,6 +190,31 @@ function Header() {
           </div>
         </div>
       </nav>
+
+      {/* 검색 결과 */}
+      {games.length > 0 && (
+        <ul className={styles.searchResults}>
+          {games.map((game) => (
+            <li
+              key={game.appid}
+              className={styles.gameItem}
+              onClick={() => handleGameClick(game.appid)} // 게임 이름 클릭 시 디테일 페이지로 이동
+            >
+              {/* 게임 로고 이미지 */}
+              {game.logo && (
+                <img
+                  src={game.logo} // 게임 로고 이미지 URL
+                  alt={game.name}
+                  className={styles.gameLogo} // 로고 스타일 클래스
+                />
+              )}
+              <span>{game.name}</span> {/* 게임 이름 */}
+            </li>
+          ))}
+        </ul>
+      )}
+      {error && <div style={{ color: "red" }}>{error}</div>}
+      {games.length === 0 && !error}
     </div>
   );
 }

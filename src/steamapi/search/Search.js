@@ -31,7 +31,7 @@ function Search() {
   }, [steamAppName]);
 
   const handleSearchSubmit = (appid) => {
-    navigate(`/test/${appid}`); // 게임의 appid를 이용해 상세 페이지로 이동
+    navigate(`/game_detail/${appid}`); // 게임의 appid를 이용해 상세 페이지로 이동
   };
 
   return (
