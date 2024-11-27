@@ -11,6 +11,7 @@ function Detail() {
   const { steamAppId } = useParams();
 
   const getGame = async () => {
+    setError(null); // 새로운 게임을 검색할 때마다 오류 초기화
     try {
       const response = await fetch(`http://localhost:8080/game/${steamAppId}`);
       if (!response.ok) {
@@ -28,6 +29,7 @@ function Detail() {
 
   useEffect(() => {
     if (steamAppId) {
+      setLoading(true); // 새 게임을 검색할 때 로딩 상태 설정
       getGame();
     }
   }, [steamAppId]);
