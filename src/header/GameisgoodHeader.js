@@ -21,7 +21,7 @@ function Header() {
   const [error, setError] = useState(null); // 오류 상태
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  // Debounced 검색어 입력 핸들러 (50ms로 변경)
+  // Debounced 검색어 입력 핸들러
   const handleSearchChange = debounce(async (query) => {
     setSearchQuery(query); // 검색어 상태 업데이트
 
@@ -56,6 +56,8 @@ function Header() {
   // 게임 클릭 시 디테일 페이지로 이동
   const handleGameClick = (appid) => {
     navigate(`/game_detail/${appid}`); // 게임의 appid를 이용해 디테일 페이지로 이동
+    setSearchQuery("");
+    setGames([]);
   };
 
   return (
