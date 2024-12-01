@@ -1,0 +1,120 @@
+/* main.module.css */
+
+/* 기본 설정 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  position: relative;
+}
+
+.chatContainer {
+  position: fixed;
+  bottom: 10px;
+  right: 80px;
+  width: 300px;
+  height: 400px;
+  background-color: #2f3136;
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.open {
+  display: flex;
+}
+
+.chatHeader {
+  background-color: #202225;
+  padding: 10px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatBody {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  color: white;
+  max-height: 300px;
+}
+
+.chatMessage {
+  margin-bottom: 10px;
+}
+
+.userMessage {
+  background-color: #7289da;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.botMessage {
+  background-color: #99aab5;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.chatInput {
+  display: flex;
+  padding: 10px;
+  background-color: #202225;
+}
+
+.chatInput input {
+  flex-grow: 1;
+  padding: 5px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.chatInput button {
+  background-color: #7289da;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chatInput button:hover {
+  background-color: #5b6e8e;
+}
+
+.chatIcon {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  background-color: #7289da;
+  padding: 10px;
+  border-radius: 50%;
+  color: white;
+}
+
+.chatIcon:hover {
+  background-color: #5b6e8e;
+}
+
+.closeBtn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* 타이핑 중 효과 */
+.typing {
+  font-style: italic;
+  color: #99aab5;
+}
