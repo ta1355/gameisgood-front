@@ -90,7 +90,7 @@ function Main() {
         <div className={styles.chatInput}>
           <input
             type="text"
-            placeholder="Enter your message"
+            placeholder="처음 이용시 '도움'을 입력하세요"
             value={message}
             onChange={(e) => setMessage(e.target.value)} // 메시지 입력
           />
