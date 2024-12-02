@@ -11,6 +11,7 @@ import NewReleases from "./steamapi/newreleases/NewReleases";
 import PostList from "./post/PostList";
 import CreatePost from "./post/CreatePost";
 import PostDetail from "./post/PostDetail";
+import Signup from "./user/login/Signup";
 import Main from "./main/main";
 import "./App.css";
 
@@ -26,8 +27,9 @@ function App() {
         <Route path="/new_releases" element={<NewReleases />} />
         <Route path="/game_detail/:steamAppId" element={<GameDetail />} />
         <Route path="/search/:steamAppName" element={<Search />} />
-        <Route path="post/list" element={<PostList />} />
-        <Route path="post/create" element={<CreatePost />} />
+        <Route path="/post/list" element={<PostList />} />
+        <Route path="/post/create" element={<CreatePost />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="post/:id" element={<PostDetail />} />
       </Routes>
       <Footer></Footer>
