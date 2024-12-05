@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./Signup.module.css"; // CSS 모듈 import
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,6 @@ const Signup = () => {
 
     try {
       const response = await fetch("/user/create", {
-        // 상대 경로로 변경
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,44 +44,55 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container">
+    <div className={styles.signupContainer}>
       <h2>회원가입</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">아이디</label>
+        <div className={styles.signupFormGroup}>
+          <label htmlFor="username" className={styles.signupLabel}>
+            아이디
+          </label>
           <input
             type="text"
             id="username"
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className={styles.signupInput}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="userPassword">비밀번호</label>
+        <div className={styles.signupFormGroup}>
+          <label htmlFor="userPassword" className={styles.signupLabel}>
+            비밀번호
+          </label>
           <input
             type="password"
             id="userPassword"
             name="userPassword"
             value={userPassword}
             onChange={(e) => setUserPassword(e.target.value)}
+            className={styles.signupInput}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="userEmail">이메일</label>
+        <div className={styles.signupFormGroup}>
+          <label htmlFor="userEmail" className={styles.signupLabel}>
+            이메일
+          </label>
           <input
             type="email"
             id="userEmail"
             name="userEmail"
             value={userEmail}
             onChange={(e) => setUserEmail(e.target.value)}
+            className={styles.signupInput}
             required
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
-        <button type="submit">회원가입</button>
+        {error && <div className={styles.signupErrorMessage}>{error}</div>}
+        <button className={styles.signupButton} type="submit">
+          회원가입
+        </button>
       </form>
     </div>
   );

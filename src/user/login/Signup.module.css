@@ -1,55 +1,60 @@
-/* Signup.module.css */
-.signupForm {
-  width: 300px;
-  margin: 50px auto;
+/* 회원가입 폼 스타일 */
+.signupContainer {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background-color: #f4f4f9;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
 }
 
-.title {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.formGroup {
+/* 입력 폼 그룹 스타일 */
+.signupFormGroup {
   margin-bottom: 15px;
 }
 
-.label {
+/* 입력 필드 레이블 스타일 */
+.signupLabel {
+  display: block;
   font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.input {
-  padding: 8px;
-  font-size: 16px;
+/* 입력 필드 스타일 */
+.signupInput {
+  width: 100%;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
 }
 
-.button {
+/* 버튼 스타일 */
+.signupButton {
+  width: 100%;
   padding: 10px;
-  font-size: 16px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.button:hover {
+.signupButton:hover {
   background-color: #45a049;
 }
 
-.errorMessage {
+/* 에러 메시지 스타일 */
+.signupErrorMessage {
   color: red;
   font-size: 14px;
-  text-align: center;
+}
+
+/* 로딩 상태 텍스트 */
+.signupLoadingText {
+  color: #ecf0f1;
+  font-size: 1.2rem;
+  margin-top: 10px;
 }
