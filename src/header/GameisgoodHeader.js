@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate 훅 사용
-import debounce from "lodash.debounce"; // lodash.debounce 라이브러리 사용
+import { useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // AuthContext import
+import debounce from "lodash.debounce";
 import styles from "./Header.module.css";
 
-// API 호출 함수 (예시)
 const fetchGames = async (query) => {
   try {
     const response = await fetch(`http://localhost:8080/search/${query}`);
     const data = await response.json();
-    return data; // 예시로 게임 목록이 그대로 반환된다고 가정
+    return data;
   } catch (error) {
     console.error("API 호출 오류:", error);
     return [];
@@ -16,26 +16,27 @@ const fetchGames = async (query) => {
 };
 
 function Header() {
-  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태
   const [games, setGames] = useState([]); // 검색된 게임 목록
   const [error, setError] = useState(null); // 오류 상태
+  const { username, isAuthenticated, logout } = useContext(AuthContext); // AuthContext 사용
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   // Debounced 검색어 입력 핸들러
   const handleSearchChange = debounce(async (query) => {
-    setSearchQuery(query); // 검색어 상태 업데이트
+    setSearchQuery(query);
 
     if (query.length > 0) {
       setError(null);
 
       try {
-        const results = await fetchGames(query); // API 호출
-        setGames(results); // 결과 저장
+        const results = await fetchGames(query);
+        setGames(results);
       } catch (err) {
         setError("검색 결과를 불러오는 데 문제가 발생했습니다.");
       }
     } else {
-      setGames([]); // 검색어가 비어 있으면 결과 초기화
+      setGames([]);
     }
   }, 50);
 
@@ -55,9 +56,15 @@ function Header() {
 
   // 게임 클릭 시 디테일 페이지로 이동
   const handleGameClick = (appid) => {
-    navigate(`/game_detail/${appid}`); // 게임의 appid를 이용해 디테일 페이지로 이동
+    navigate(`/game_detail/${appid}`);
     setSearchQuery("");
     setGames([]);
+  };
+
+  // 로그아웃 처리 함수
+  const handleLogout = () => {
+    logout(); // AuthContext의 logout 함수 호출
+    navigate("/login"); // 로그인 페이지로 리디렉션
   };
 
   return (
@@ -67,7 +74,6 @@ function Header() {
           <a className={styles.navbarBrand} href="/">
             GameisGood
           </a>
-          {/* 네비게이션 메뉴 - 홈, 로그인, 게임 정보 등 */}
           <button
             className={`navbar-toggler ${styles.navbarToggler}`}
             type="button"
@@ -79,7 +85,7 @@ function Header() {
           >
             <span
               className={`navbar-toggler-icon ${styles.navbarTogglerIcon}`}
-            ></span>
+            />
           </button>
           <div
             className={`collapse navbar-collapse ${styles.navbarCollapse}`}
@@ -96,72 +102,31 @@ function Header() {
                   홈
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#" style={{ color: "white" }}>
-                  로그인
-                </a>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{ color: "white" }}
-                >
-                  게임 정보
-                </a>
-                <ul
-                  className={`dropdown-menu ${styles.dropdownMenu}`}
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="/top_sellers"
-                    >
-                      인기순
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="/new_releases"
-                    >
-                      최신순
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="/special"
-                    >
-                      특별할인
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="/coming_soon"
-                    >
-                      출시 예정
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
-                    >
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              {!isAuthenticated ? (
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    href="/login"
+                    style={{ color: "white" }}
+                  >
+                    로그인
+                  </a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <button
+                    className="nav-link"
+                    onClick={handleLogout}
+                    style={{
+                      color: "white",
+                      background: "none",
+                      border: "none",
+                    }}
+                  >
+                    로그아웃
+                  </button>
+                </li>
+              )}
               <li className="nav-item">
                 <a
                   className="nav-link"
@@ -172,6 +137,13 @@ function Header() {
                 </a>
               </li>
             </ul>
+
+            {username && (
+              <div className="welcome-message ps-3 pe-3 ">
+                <h2 className="fs-5">환영합니다, {username}님!</h2>
+              </div>
+            )}
+
             {/* 검색 폼 */}
             <form className="d-flex" onSubmit={handleSearchSubmit}>
               <input
@@ -200,17 +172,16 @@ function Header() {
             <li
               key={game.appid}
               className={styles.gameItem}
-              onClick={() => handleGameClick(game.appid)} // 게임 이름 클릭 시 디테일 페이지로 이동
+              onClick={() => handleGameClick(game.appid)}
             >
-              {/* 게임 로고 이미지 */}
               {game.logo && (
                 <img
-                  src={game.logo} // 게임 로고 이미지 URL
+                  src={game.logo}
                   alt={game.name}
-                  className={styles.gameLogo} // 로고 스타일 클래스
+                  className={styles.gameLogo}
                 />
               )}
-              <span>{game.name}</span> {/* 게임 이름 */}
+              <span>{game.name}</span>
             </li>
           ))}
         </ul>
