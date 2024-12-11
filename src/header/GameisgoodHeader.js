@@ -127,6 +127,67 @@ function Header() {
                   </button>
                 </li>
               )}
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{ color: "white" }}
+                >
+                  게임 정보
+                </a>
+                <ul
+                  className={`dropdown-menu ${styles.dropdownMenu}`}
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="/top_sellers"
+                    >
+                      인기순
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="/new_releases"
+                    >
+                      최신순
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="/special"
+                    >
+                      특별할인
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="/coming_soon"
+                    >
+                      출시 예정
+                    </a>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a
+                      className={`dropdown-item ${styles.dropdownItem}`}
+                      href="#"
+                    >
+                      Something else here
+                    </a>
+                  </li>
+                </ul>
+              </li>
               <li className="nav-item">
                 <a
                   className="nav-link"

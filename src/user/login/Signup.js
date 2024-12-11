@@ -1,11 +1,13 @@
 import { useState } from "react";
 import styles from "./Signup.module.css"; // CSS 모듈 import
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,8 @@ const Signup = () => {
       }
 
       const result = await response.json();
-      console.log("회원가입 성공:", result);
+      alert("회원가입되었습니다!");
+      navigate("/login");
 
       // 상태 초기화
       setUsername("");

@@ -30,32 +30,42 @@ function PostList() {
     navigate(`/post/create`);
   };
 
+  // jwtToken이 로컬 스토리지에 있는지 확인
+  const isAuthenticated = localStorage.getItem("jwtToken");
+
   return (
     <div className={styles.postListContainer}>
       {loading ? (
         <h1 className={styles.loadingText}>로딩중...</h1>
-      ) : list.length === 0 ? (
-        <h1 className={styles.noResultsMessage}>검색 결과가 없습니다.</h1>
       ) : (
-        <div className={styles.gameList}>
-          {list.map((post) => (
-            <Posts
-              key={post.id}
-              id={post.id}
-              title={post.title}
-              detail={post.detail}
-              createDateTime={post.createDateTime}
-              deletedDateTime={post.deletedDateTime}
-              likeCount={post.likeCount}
-              image={post.image || "없음"}
-              user={post.user || "없음"}
-              comments={post.comments}
-              game={post.game}
-            />
-          ))}
-          <div className={styles.buttonContainer}>
-            <button onClick={handleTitleClick}>게시글 등록</button>
-          </div>
+        <div>
+          {list.length === 0 ? (
+            <h1 className={styles.noResultsMessage}>검색 결과가 없습니다.</h1>
+          ) : (
+            <div className={styles.gameList}>
+              {list.map((post) => (
+                <Posts
+                  key={post.id}
+                  id={post.id}
+                  title={post.title}
+                  detail={post.detail}
+                  createDateTime={post.createDateTime}
+                  deletedDateTime={post.deletedDateTime}
+                  likeCount={post.likeCount}
+                  image={post.image || "없음"}
+                  user={post.user || "없음"}
+                  comments={post.comments}
+                  game={post.game}
+                />
+              ))}
+            </div>
+          )}
+          {/* jwtToken이 있을 때만 "게시글 등록" 버튼을 표시 */}
+          {isAuthenticated && (
+            <div className={styles.buttonContainer}>
+              <button onClick={handleTitleClick}>게시글 등록</button>
+            </div>
+          )}
         </div>
       )}
     </div>
