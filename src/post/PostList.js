@@ -53,7 +53,7 @@ function PostList() {
                   deletedDateTime={post.deletedDateTime}
                   likeCount={post.likeCount}
                   image={post.image || "없음"}
-                  user={post.user || "없음"}
+                  user={post.username || "없음"}
                   comments={post.comments}
                   game={post.game}
                 />

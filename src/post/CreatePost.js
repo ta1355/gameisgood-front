@@ -19,7 +19,6 @@ function CreatePost() {
     e.preventDefault();
 
     // 유효성 검사
-    //공백제거후 유효성 검사
     if (title.trim() === "") {
       alert("제목을 입력해주세요.");
       return;
@@ -59,10 +58,17 @@ function CreatePost() {
       formData.append("image", image);
     }
 
+    // 로컬 스토리지에서 JWT 토큰을 가져옴
+    const token = localStorage.getItem("jwtToken");
+    console.log(token);
+
     try {
       const response = await fetch("http://localhost:8080/createpost", {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {

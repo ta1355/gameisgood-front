@@ -15,9 +15,19 @@ function Posts({
 }) {
   const navigate = useNavigate();
 
-  const formattedDate = new Date(createDateTime).toLocaleString();
+  // 날짜 포맷 함수
+  const formatDate = (date) => {
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    };
+    return new Intl.DateTimeFormat("ko-KR", options).format(new Date(date));
+  };
+
+  const formattedDate = formatDate(createDateTime);
   const formattedDeletedDate = deletedDateTime
-    ? new Date(deletedDateTime).toLocaleString()
+    ? formatDate(deletedDateTime)
     : null;
 
   const handleTitleClick = () => {
@@ -50,8 +60,8 @@ function Posts({
       </div>
 
       <p>
-        <strong>유저:</strong>{" "}
-        {user === "없음" ? "없음" : user.name || "정보 없음"}
+        <strong>유저: </strong>
+        {user === "없음" || !user ? "없음" : user || "정보 없음"}
       </p>
     </div>
   );
