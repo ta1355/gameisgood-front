@@ -7,19 +7,19 @@ const Login = () => {
   const [userPassword, setUserPassword] = useState(""); // 사용자 비밀번호
   const [error, setError] = useState(""); // 오류 메시지
   const navigate = useNavigate(); // 로그인 성공 후 이동을 위한 navigate
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext); // 로그인 함수
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
-    console.log("Token from localStorage on load:", token); // 로컬스토리지에서 가져온 토큰 출력
     if (token) {
-      navigate("/"); // 로그인 상태이면 바로 리디렉션
+      navigate("/"); // 이미 로그인된 상태이면 바로 리디렉션
     }
+
     // 구글 로그인 리디렉션에서 코드 받기
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (code) {
-      handleGoogleTokenExchange(code);
+      handleGoogleTokenExchange(code); // 구글 로그인 코드 처리
     }
   }, [navigate]);
 
@@ -43,22 +43,13 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Server response data:", data); // 서버 응답 확인
-
-        const receivedToken = data.token; // 응답에서 받은 token
-        console.log("Received token:", receivedToken); // 실제 받은 token 확인
+        const receivedToken = data.token; // 응답에서 받은 토큰
 
         if (receivedToken) {
-          localStorage.setItem("testKey", "testValue");
-          console.log(localStorage.getItem("testKey")); // "testValue"
           localStorage.setItem("jwtToken", receivedToken); // 로컬스토리지에 토큰 저장
-          console.log("Token stored in localStorage:", receivedToken); // 로컬스토리지에 저장된 토큰 확인
-
-          // 로그인 상태 업데이트
-          login(username, receivedToken);
+          login(username, receivedToken); // 로그인 상태 업데이트
           navigate("/"); // 로그인 후 홈 페이지로 리디렉션
         } else {
-          console.error("No token received from server");
           setError("로그인 실패: 토큰이 없습니다.");
         }
       } else {
@@ -75,31 +66,28 @@ const Login = () => {
   const handleGoogleTokenExchange = async (code) => {
     try {
       const response = await fetch(
-        "http://localhost:8080/login/oauth2/google",
+        "http://localhost:8080/login/oauth2/code/google",
         {
-          method: "POST",
+          method: "POST", // POST 방식으로 수정
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ code }),
+          body: JSON.stringify({ code }), // `code`를 JSON 바디로 전달
+          credentials: "include", // 쿠키를 포함한 요청
         }
       );
 
       if (response.ok) {
         const data = await response.json();
         const token = data.token;
+
         if (token) {
-          localStorage.setItem("jwtToken", token);
-          console.log("Google login token stored in localStorage:", token);
-
-          // 추가: 구글 로그인 후 저장된 토큰을 확인
-          const storedToken = localStorage.getItem("jwtToken");
-          console.log("Stored token after Google login:", storedToken);
-
-          login(data.username); // 구글 로그인 후 사용자 정보 업데이트
-          navigate("/"); // 로그인 성공 후 홈 페이지로 리디렉션
+          localStorage.setItem("jwtToken", token); // 로컬스토리지에 토큰 저장
+          login(data.username, token); // 로그인 상태 업데이트
+          navigate("/"); // 로그인 후 홈 페이지로 리디렉션
         } else {
           console.error("No token received from server after Google login");
+          setError("로그인 실패: 토큰이 없습니다.");
         }
       } else {
         const errorText = await response.text();
@@ -112,15 +100,14 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async () => {
-    const clientId =
-      "314722272928-n0o5noignn56bpp9sen4gmcg1r57derl.apps.googleusercontent.com"; // 구글 클라이언트 ID
+    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const redirectUri = encodeURIComponent(
-      "http://localhost:3000/login/oauth2/code/google"
-    ); // 리디렉션 URI
-    const scope = encodeURIComponent("profile email"); // 요청할 권한
-    const state = encodeURIComponent("randomStateString"); // CSRF 보호를 위한 상태값
+      process.env.REACT_APP_GOOGLE_REDIRECT_URI
+    );
+    const scope = encodeURIComponent("profile email");
+    const state = encodeURIComponent("randomStateString");
 
-    // 구글 로그인 URL
+    // 구글 로그인 URL 생성
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${clientId}&scope=${scope}&state=${state}&redirect_uri=${redirectUri}&service=lso&o2v=1&ddm=1&flowName=GeneralOAuthFlow`;
 
     // 구글 로그인 페이지로 리디렉션
