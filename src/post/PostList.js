@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import Posts from "./Posts"; // Posts 컴포넌트 불러오기
-import styles from "./PostList.module.css"; // CSS Module 불러오기
+import Posts from "./Posts";
+import styles from "./PostList.module.css";
 import { useNavigate } from "react-router-dom";
 
 function PostList() {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
 
-  const getList = async () => {
+  const getList = async (page) => {
     try {
-      const response = await fetch(`http://localhost:8080/post`);
-      const json = await response.json();
-
-      console.log(json);
-      setList(json); // 데이터를 받아서 상태로 설정
+      const response = await fetch(
+        `http://localhost:8080/post?page=${page}&size=10`
+      );
+      const data = await response.json();
+      setList(data.content);
+      setTotalPages(data.totalPages);
       setLoading(false);
     } catch (e) {
       console.log("오류:" + e);
@@ -23,51 +26,50 @@ function PostList() {
   };
 
   useEffect(() => {
-    getList();
-  }, []);
+    getList(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const handleTitleClick = () => {
     navigate(`/post/create`);
   };
 
-  // jwtToken이 로컬 스토리지에 있는지 확인
   const isAuthenticated = localStorage.getItem("jwtToken");
 
   return (
     <div className={styles.postListContainer}>
       {loading ? (
-        <h1 className={styles.loadingText}>로딩중...</h1>
+        <div className={styles.loadingText}>Loading...</div>
+      ) : list.length === 0 ? (
+        <div className={styles.noResultsMessage}>게시글이 없습니다.</div>
       ) : (
-        <div>
-          {list.length === 0 ? (
-            <h1 className={styles.noResultsMessage}>검색 결과가 없습니다.</h1>
-          ) : (
-            <div className={styles.gameList}>
-              {list.map((post) => (
-                <Posts
-                  key={post.id}
-                  id={post.id}
-                  title={post.title}
-                  detail={post.detail}
-                  createDateTime={post.createDateTime}
-                  deletedDateTime={post.deletedDateTime}
-                  likeCount={post.likeCount}
-                  image={post.image || "없음"}
-                  user={post.username || "없음"}
-                  comments={post.comments}
-                  game={post.game}
-                />
-              ))}
-            </div>
-          )}
-          {/* jwtToken이 있을 때만 "게시글 등록" 버튼을 표시 */}
-          {isAuthenticated && (
-            <div className={styles.buttonContainer}>
-              <button onClick={handleTitleClick}>게시글 등록</button>
-            </div>
-          )}
+        <div className={styles.gameList}>
+          {list.map((post) => (
+            <Posts key={post.id} {...post} />
+          ))}
+          <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i)}
+                className={
+                  currentPage === i
+                    ? styles.activePageButton
+                    : styles.pageButton
+                }
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
         </div>
       )}
+      <div className={styles.writeButtonContainer}>
+        {isAuthenticated && <button onClick={handleTitleClick}>글쓰기</button>}
+      </div>
     </div>
   );
 }

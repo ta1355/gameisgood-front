@@ -13,13 +13,19 @@ const Login = () => {
     const token = localStorage.getItem("jwtToken");
     if (token) {
       navigate("/"); // 이미 로그인된 상태이면 바로 리디렉션
+      return; // 이미 토큰이 있으면 처리 끝
     }
 
     // 구글 로그인 리디렉션에서 코드 받기
     const urlParams = new URLSearchParams(window.location.search);
+    console.log("URL Parameters:", urlParams); // URL 파라미터를 로그로 출력
+
     const code = urlParams.get("code");
     if (code) {
+      console.log("Received Google code:", code); // code가 있는지 확인
       handleGoogleTokenExchange(code); // 구글 로그인 코드 처리
+    } else {
+      console.log("No Google code in URL"); // code가 없을 경우 로그
     }
   }, [navigate]);
 
@@ -65,14 +71,18 @@ const Login = () => {
   // 구글 로그인 후 서버와의 토큰 교환
   const handleGoogleTokenExchange = async (code) => {
     try {
+      console.log("Received Google code:", code); // 로그로 코드 확인
+
       const response = await fetch(
         "http://localhost:8080/login/oauth2/code/google",
         {
-          method: "POST", // POST 방식으로 수정
+          method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded", // x-www-form-urlencoded 형식으로 요청
           },
-          body: JSON.stringify({ code }), // `code`를 JSON 바디로 전달
+          body: new URLSearchParams({
+            code: code,
+          }), // 'code'를 URLSearchParams로 변환하여 전송
           credentials: "include", // 쿠키를 포함한 요청
         }
       );

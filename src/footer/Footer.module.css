@@ -1,20 +1,20 @@
 /* Footer.module.css */
+
 .footer {
-  position: fixed; /* 화면 하단에 고정 */
-  bottom: -100px; /* 처음에는 푸터를 화면 밖으로 위치시킴 */
+  position: fixed;
+  bottom: -100px;
   left: 0;
   width: 100%;
-  background-color: #343a40; /* 어두운 배경색 */
+  background-color: #343a40;
   color: white;
-  text-align: center; /* 텍스트 가운데 정렬 */
-  padding: 10px 0; /* 상하 padding */
-  font-size: 0.875rem; /* 텍스트 크기 줄이기 */
-  transition: bottom 0.3s ease-in-out; /* 푸터가 아래로 나타나도록 애니메이션 추가 */
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.875rem;
+  transition: bottom 0.3s ease-in-out;
 }
 
-/* 푸터가 화면 아래로 내려오도록 설정 */
 .footerVisible {
-  bottom: 0; /* 페이지 맨 아래에 표시 */
+  bottom: 0;
 }
 
 .container {
