@@ -67,9 +67,11 @@ function PostList() {
           </div>
         </div>
       )}
-      <div className={styles.writeButtonContainer}>
-        {isAuthenticated && <button onClick={handleTitleClick}>글쓰기</button>}
-      </div>
+      {isAuthenticated && (
+        <div className={styles.writeButtonContainer}>
+          <button onClick={handleTitleClick}>글쓰기</button>
+        </div>
+      )}
     </div>
   );
 }
