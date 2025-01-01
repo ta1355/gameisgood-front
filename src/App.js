@@ -14,7 +14,7 @@ import CreatePost from "./post/CreatePost";
 import PostDetail from "./post/PostDetail";
 import SignUp from "./user/login/Signup";
 import LoginForm from "./user/login/Loginform";
-import Main from "./main/main";
+import Main from "./mainpage/main";
 import "./App.css";
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
           <Route path="/post/create" element={<CreatePost />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/login/oauth2/code/google" element={<LoginForm />} />
           <Route path="post/:id" element={<PostDetail />} />
         </Routes>
         <Footer></Footer>
