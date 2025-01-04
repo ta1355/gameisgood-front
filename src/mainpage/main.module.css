@@ -118,3 +118,62 @@ body {
   font-style: italic;
   color: #99aab5;
 }
+
+.popularPostsSection {
+  padding: 20px;
+  margin: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popularPostsSection h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.popularPostsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.popularPostItem {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popularPostItem:hover {
+  background-color: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.postTitle {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.postInfo {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.postAuthor {
+  font-weight: 500;
+}
+
+.postDate {
+  color: #888;
+}
+
+.viewCount {
+  color: #2196f3;
+}

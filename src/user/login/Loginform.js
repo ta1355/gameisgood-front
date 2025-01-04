@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { AuthContext } from "./../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -184,6 +184,14 @@ const Login = () => {
     return <div>구글 로그인 처리 중...</div>;
   }
 
+  const handleFindId = () => {
+    navigate("/find-id");
+  };
+
+  const handleChangePassword = () => {
+    navigate("/change-password");
+  };
+
   return (
     <div className="login-container">
       <h2>로그인</h2>
@@ -224,6 +232,12 @@ const Login = () => {
         <button onClick={handleSignup} disabled={isLoading}>
           회원가입
         </button>
+      </div>
+      <div>
+        <button onClick={handleFindId}>아이디 찾기</button>
+      </div>
+      <div>
+        <button onClick={handleChangePassword}>비밀번호 변경</button>
       </div>
     </div>
   );

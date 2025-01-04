@@ -13,8 +13,10 @@ import PostList from "./post/PostList";
 import CreatePost from "./post/CreatePost";
 import PostDetail from "./post/PostDetail";
 import SignUp from "./user/login/Signup";
-import LoginForm from "./user/login/Loginform";
+import LoginForm from "./user/login/LoginForm";
 import Main from "./mainpage/main";
+import FindId from "./user/login/FindId";
+import ChangePassword from "./user/login/ChangePassword";
 import "./App.css";
 
 function App() {
@@ -35,7 +37,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/login/oauth2/code/google" element={<LoginForm />} />
+          <Route path="/find-id" element={<FindId />} />
           <Route path="post/:id" element={<PostDetail />} />
+          <Route path="/change-password" element={<ChangePassword />} />
         </Routes>
         <Footer></Footer>
       </Router>

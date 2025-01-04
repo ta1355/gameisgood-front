@@ -16,11 +16,19 @@ function PostList() {
         `http://localhost:8080/post?page=${page}&size=10`
       );
       const data = await response.json();
-      setList(data.content);
-      setTotalPages(data.totalPages);
-      setLoading(false);
+
+      if (data && data.content) {
+        setList(data.content);
+        setTotalPages(data.totalPages || 0);
+      } else {
+        setList([]);
+        setTotalPages(0);
+      }
     } catch (e) {
-      console.log("오류:" + e);
+      console.error("게시글 목록을 불러오는 중 오류 발생:", e);
+      setList([]);
+      setTotalPages(0);
+    } finally {
       setLoading(false);
     }
   };
@@ -39,32 +47,40 @@ function PostList() {
 
   const isAuthenticated = localStorage.getItem("jwtToken");
 
+  if (loading) {
+    return (
+      <div className={styles.postListContainer}>
+        <div className={styles.loadingText}>Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.postListContainer}>
-      {loading ? (
-        <div className={styles.loadingText}>Loading...</div>
-      ) : list.length === 0 ? (
+      {list.length === 0 ? (
         <div className={styles.noResultsMessage}>게시글이 없습니다.</div>
       ) : (
         <div className={styles.gameList}>
           {list.map((post) => (
             <Posts key={post.id} {...post} />
           ))}
-          <div className={styles.pagination}>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i}
-                onClick={() => handlePageChange(i)}
-                className={
-                  currentPage === i
-                    ? styles.activePageButton
-                    : styles.pageButton
-                }
-              >
-                {i + 1}
-              </button>
-            ))}
-          </div>
+          {totalPages > 0 && (
+            <div className={styles.pagination}>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i}
+                  onClick={() => handlePageChange(i)}
+                  className={
+                    currentPage === i
+                      ? styles.activePageButton
+                      : styles.pageButton
+                  }
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       )}
       {isAuthenticated && (

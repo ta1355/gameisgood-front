@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./main.module.css"; // CSS 모듈을 import
+import { useNavigate } from "react-router-dom"; // 게시글 클릭 시 이동을 위해 추가
 
 function Main() {
   const [message, setMessage] = useState(""); // 메시지 상태
@@ -8,6 +9,50 @@ function Main() {
   const [messages, setMessages] = useState([]); // 대화 메시지들
   const [isOpen, setIsOpen] = useState(false); // 대화창 열고 닫기
   const [isTyping, setIsTyping] = useState(false); // 봇이 타이핑 중인지 여부
+  const [popularPosts, setPopularPosts] = useState([]); // 인기 게시글 상태 추가
+  const navigate = useNavigate();
+
+  // 인기 게시글 불러오기
+  useEffect(() => {
+    const fetchPopularPosts = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/post/today/popularity"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Received popular posts:", data); // 데이터 확인용 로그
+          setPopularPosts(data);
+        } else {
+          console.error("인기 게시글을 불러오는데 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("Error fetching popular posts:", error);
+      }
+    };
+
+    fetchPopularPosts();
+  }, []);
+
+  // 날짜 포맷팅 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}-${String(date.getDate()).padStart(2, "0")}`;
+  };
+
+  // 게시글 클릭 핸들러
+  const handlePostClick = (postId) => {
+    console.log("Clicked post ID:", postId); // ID 확인용 로그
+    if (postId) {
+      // ID가 있는 경우에만 네비게이트
+      navigate(`/post/${postId}`);
+    } else {
+      console.error("게시글 ID가 없습니다.");
+    }
+  };
 
   // 메시지 전송 함수
   const sendMessageToBackend = async () => {
@@ -61,6 +106,30 @@ function Main() {
 
   return (
     <div className={styles.App}>
+      <div className={styles.popularPostsSection}>
+        <h2>오늘의 인기 게시글</h2>
+        <div className={styles.popularPostsList}>
+          {popularPosts.map((post, index) => (
+            <div
+              key={index}
+              className={styles.popularPostItem}
+              onClick={() => handlePostClick(post.id)}
+            >
+              <h3 className={styles.postTitle}>{post.title}</h3>
+              <div className={styles.postInfo}>
+                <span className={styles.postAuthor}>{post.username}</span>
+                <span className={styles.postDate}>
+                  {formatDate(post.createDateTime)}
+                </span>
+                <span className={styles.viewCount}>
+                  조회수: {post.viewCount}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className={`${styles.chatContainer} ${isOpen ? styles.open : ""}`}>
         <div className={styles.chatHeader}>
           <h2>도우미 봇</h2>
