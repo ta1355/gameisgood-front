@@ -10,6 +10,7 @@ function Main() {
   const [isOpen, setIsOpen] = useState(false); // 대화창 열고 닫기
   const [isTyping, setIsTyping] = useState(false); // 봇이 타이핑 중인지 여부
   const [popularPosts, setPopularPosts] = useState([]); // 인기 게시글 상태 추가
+  const [games, setGames] = useState([]); // 게임 리스트 상태 추가
   const navigate = useNavigate();
 
   // 인기 게시글 불러오기
@@ -32,6 +33,21 @@ function Main() {
     };
 
     fetchPopularPosts();
+  }, []);
+
+  // 게임 리스트 불러오기
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/game/specials");
+        const data = await response.json();
+        setGames(data.specials.slice(0, 6)); // 상위 6개의 게임만 설정
+      } catch (error) {
+        console.error("Error fetching games:", error);
+      }
+    };
+
+    fetchGames();
   }, []);
 
   // 날짜 포맷팅 함수
@@ -125,6 +141,23 @@ function Main() {
                   조회수: {post.viewCount}
                 </span>
               </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.gamesSection}>
+        <h2>특가 게임</h2>
+        <div className={styles.gamesList}>
+          {games.map((game) => (
+            <div key={game.id} className={styles.gameItem}>
+              <img
+                src={game.smallCapsuleImage}
+                alt={game.name}
+                className={styles.gameImage}
+              />
+              <h3 className={styles.gameName}>{game.name}</h3>
+              <p className={styles.gamePrice}>{game.formattedFinalPrice}</p>
             </div>
           ))}
         </div>

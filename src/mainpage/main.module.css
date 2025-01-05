@@ -11,11 +11,12 @@ body {
   position: relative;
 }
 
+/* 도우미 봇 모달 관련 스타일 */
 .chatContainer {
   position: fixed;
   bottom: 10px;
   right: 80px;
-  width: 300px;
+  width: 400px;
   height: 400px;
   background-color: #2f3136;
   border-radius: 8px;
@@ -70,23 +71,39 @@ body {
 
 .chatInput input {
   flex-grow: 1;
-  padding: 5px;
-  margin-right: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: 1px solid #5f6b72;
   border-radius: 5px;
-  border: none;
+  margin-right: 10px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.chatInput input:focus {
+  border-color: #2980b9;
+  background-color: #3b4a58;
+  outline: none;
 }
 
 .chatInput button {
-  background-color: #7289da;
+  background-color: #2980b9;
   color: white;
-  padding: 5px 10px;
+  padding: 12px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .chatInput button:hover {
-  background-color: #5b6e8e;
+  background-color: #3498db;
+  transform: scale(1.05);
+}
+
+.chatInput button:active {
+  transform: scale(1);
 }
 
 .chatIcon {
@@ -119,51 +136,55 @@ body {
   color: #99aab5;
 }
 
+/* 인기 게시글 섹션 스타일 */
 .popularPostsSection {
   padding: 20px;
   margin: 20px;
-  background-color: white;
+  background-color: #2c3e50;
+  color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .popularPostsSection h2 {
   margin-bottom: 20px;
-  color: #333;
+  color: #ecf0f1;
   font-size: 1.5rem;
 }
 
 .popularPostsList {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .popularPostItem {
-  padding: 15px;
-  border: 1px solid #eee;
+  padding: 20px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: 1px solid #5f6b72;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .popularPostItem:hover {
-  background-color: #f8f8f8;
+  background-color: #3b4a58;
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .postTitle {
   margin: 0 0 10px 0;
   font-size: 1.1rem;
-  color: #333;
+  color: #ecf0f1;
 }
 
 .postInfo {
   display: flex;
   gap: 15px;
   font-size: 0.9rem;
-  color: #666;
+  color: #bdc3c7;
 }
 
 .postAuthor {
@@ -171,9 +192,68 @@ body {
 }
 
 .postDate {
-  color: #888;
+  color: #bdc3c7;
 }
 
 .viewCount {
-  color: #2196f3;
+  color: #3498db;
+}
+
+/* 게임 리스트 섹션 스타일 */
+.gamesSection {
+  padding: 20px;
+  margin: 20px;
+  background-color: #2c3e50;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.gamesSection h2 {
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  font-size: 1.5rem;
+}
+
+.gamesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gameItem {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  border: 1px solid #5f6b72;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: calc(50% - 20px); /* 2개씩 배치되도록 설정 */
+}
+
+.gameItem:hover {
+  background-color: #3b4a58;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.gameImage {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.gameName {
+  flex-grow: 1;
+  font-size: 1.2rem;
+  color: #ecf0f1;
+}
+
+.gamePrice {
+  font-size: 1rem;
+  color: #bdc3c7;
 }
