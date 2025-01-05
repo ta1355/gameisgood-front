@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./PostDetail.module.css";
 
 function Detail() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [liked, setLiked] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
   const { id } = useParams();
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setCurrentUser(payload.sub);
+    }
+  }, []);
 
   const getPost = async () => {
     try {
@@ -60,7 +70,7 @@ function Detail() {
   const handleLike = async () => {
     const token = localStorage.getItem("jwtToken");
     if (!token) {
-      setError("로그인 정보가 없습니다.");
+      alert("로그인 정보가 없습니다.");
       return;
     }
     if (liked) {
@@ -97,7 +107,7 @@ function Detail() {
     e.preventDefault();
     const token = localStorage.getItem("jwtToken");
     if (!token) {
-      setError("로그인 정보가 없습니다.");
+      alert("로그인 정보가 없습니다.");
       return;
     }
     if (!newComment.trim()) {
@@ -128,6 +138,35 @@ function Detail() {
     }
   };
 
+  const handleDelete = async () => {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      alert("로그인 정보가 없습니다.");
+      return;
+    }
+    if (window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
+      try {
+        const response = await fetch(`http://localhost:8080/postdelete/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          alert("게시글이 삭제되었습니다.");
+          navigate("/");
+        } else if (response.status === 403) {
+          alert("게시글 삭제 권한이 없습니다.");
+        } else {
+          throw new Error("게시글 삭제에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("게시글 삭제 중 오류 발생:", error);
+        alert("게시글 삭제 중 오류가 발생했습니다.");
+      }
+    }
+  };
+
   useEffect(() => {
     if (id) {
       getPost();
@@ -152,6 +191,11 @@ function Detail() {
             작성일: {new Date(post.createDateTime).toLocaleString()}
           </p>
           <p className={styles.viewCount}>조회수: {post.viewCount}</p>
+          {currentUser === post.username && (
+            <button onClick={handleDelete} className={styles.deleteButton}>
+              삭제
+            </button>
+          )}
         </div>
 
         {post.image && (
