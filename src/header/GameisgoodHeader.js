@@ -175,17 +175,6 @@ function Header() {
                       출시 예정
                     </a>
                   </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a
-                      className={`dropdown-item ${styles.dropdownItem}`}
-                      href="#"
-                    >
-                      Something else here
-                    </a>
-                  </li>
                 </ul>
               </li>
               <li className="nav-item">

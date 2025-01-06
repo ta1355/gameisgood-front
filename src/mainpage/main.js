@@ -11,6 +11,8 @@ function Main() {
   const [isTyping, setIsTyping] = useState(false); // 봇이 타이핑 중인지 여부
   const [popularPosts, setPopularPosts] = useState([]); // 인기 게시글 상태 추가
   const [games, setGames] = useState([]); // 게임 리스트 상태 추가
+  const [posts, setPosts] = useState([]); // 게시글 리스트 상태 추가
+  const [topSellers, setTopSellers] = useState([]); // 인기 게임 리스트 상태 추가
   const navigate = useNavigate();
 
   // 인기 게시글 불러오기
@@ -50,6 +52,43 @@ function Main() {
     fetchGames();
   }, []);
 
+  // 게시글 리스트 불러오기
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/post?page=0&size=10"
+        );
+        const data = await response.json();
+        if (data && data.content) {
+          setPosts(data.content);
+        } else {
+          setPosts([]);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setPosts([]);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // 인기 게임 리스트 불러오기
+  useEffect(() => {
+    const fetchTopSellers = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/game/top_sellers");
+        const data = await response.json();
+        setTopSellers(data.specials.slice(0, 6)); // 상위 6개의 인기 게임만 설정
+      } catch (error) {
+        console.error("Error fetching top sellers:", error);
+      }
+    };
+
+    fetchTopSellers();
+  }, []);
+
   // 날짜 포맷팅 함수
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -67,6 +106,17 @@ function Main() {
       navigate(`/post/${postId}`);
     } else {
       console.error("게시글 ID가 없습니다.");
+    }
+  };
+
+  // 게임 클릭 핸들러
+  const handleGameClick = (steamAppId) => {
+    console.log("Clicked game ID:", steamAppId); // ID 확인용 로그
+    if (steamAppId) {
+      // ID가 있는 경우에만 네비게이트
+      navigate(`/game_detail/${steamAppId}`);
+    } else {
+      console.error("게임 ID가 없습니다.");
     }
   };
 
@@ -122,86 +172,141 @@ function Main() {
 
   return (
     <div className={styles.App}>
-      <div className={styles.popularPostsSection}>
-        <h2>오늘의 인기 게시글</h2>
-        <div className={styles.popularPostsList}>
-          {popularPosts.map((post, index) => (
-            <div
-              key={index}
-              className={styles.popularPostItem}
-              onClick={() => handlePostClick(post.id)}
-            >
-              <h3 className={styles.postTitle}>{post.title}</h3>
-              <div className={styles.postInfo}>
-                <span className={styles.postAuthor}>{post.username}</span>
-                <span className={styles.postDate}>
-                  {formatDate(post.createDateTime)}
-                </span>
-                <span className={styles.viewCount}>
-                  조회수: {post.viewCount}
-                </span>
+      <div className={styles.background}>
+        <div className={styles.popularPostsSection}>
+          <h2>오늘의 인기 게시글</h2>
+          <div className={styles.popularPostsList}>
+            {popularPosts.length > 0 ? (
+              popularPosts.map((post, index) => (
+                <div
+                  key={index}
+                  className={styles.popularPostItem}
+                  onClick={() => handlePostClick(post.id)}
+                >
+                  <h3 className={styles.postTitle}>{post.title}</h3>
+                  <div className={styles.postInfo}>
+                    <span className={styles.postAuthor}>{post.username}</span>
+                    <span className={styles.postDate}>
+                      {formatDate(post.createDateTime)}
+                    </span>
+                    <span className={styles.viewCount}>
+                      조회수: {post.viewCount}
+                    </span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>오늘의 인기 게시글이 없습니다.</p>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.postsSection}>
+          <h2>최근 게시글</h2>
+          <div className={styles.postsList}>
+            {posts.map((post) => (
+              <div
+                key={post.id}
+                className={styles.postItem}
+                onClick={() => handlePostClick(post.id)}
+              >
+                <h3 className={styles.postTitle}>{post.title}</h3>
+                <div className={styles.postInfo}>
+                  <span className={styles.postAuthor}>{post.user}</span>
+                  <span className={styles.postDate}>
+                    {formatDate(post.createDateTime)}
+                  </span>
+                  <span className={styles.viewCount}>
+                    조회수: {post.viewCount}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={styles.gamesSection}>
-        <h2>특가 게임</h2>
-        <div className={styles.gamesList}>
-          {games.map((game) => (
-            <div key={game.id} className={styles.gameItem}>
-              <img
-                src={game.smallCapsuleImage}
-                alt={game.name}
-                className={styles.gameImage}
-              />
-              <h3 className={styles.gameName}>{game.name}</h3>
-              <p className={styles.gamePrice}>{game.formattedFinalPrice}</p>
-            </div>
-          ))}
+        <div className={styles.gamesSection}>
+          <h2>특가 게임</h2>
+          <div className={styles.gamesList}>
+            {games.map((game) => (
+              <div
+                key={game.id}
+                className={styles.gameItem}
+                onClick={() => handleGameClick(game.id)}
+              >
+                <img
+                  src={game.smallCapsuleImage}
+                  alt={game.name}
+                  className={styles.gameImage}
+                />
+                <h3 className={styles.gameName}>{game.name}</h3>
+                <p className={styles.gamePrice}>{game.formattedFinalPrice}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={`${styles.chatContainer} ${isOpen ? styles.open : ""}`}>
-        <div className={styles.chatHeader}>
-          <h2>도우미 봇</h2>
-          <button onClick={toggleChatWindow} className={styles.closeBtn}>
-            X
-          </button>
+        <div className={styles.topSellersSection}>
+          <h2>인기 게임</h2>
+          <div className={styles.topSellersList}>
+            {topSellers.map((game) => (
+              <div
+                key={game.id}
+                className={styles.gameItem}
+                onClick={() => handleGameClick(game.id)}
+              >
+                <img
+                  src={game.smallCapsuleImage}
+                  alt={game.name}
+                  className={styles.gameImage}
+                />
+                <h3 className={styles.gameName}>{game.name}</h3>
+                <p className={styles.gamePrice}>{game.formattedFinalPrice}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.chatBody}>
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`${styles.chatMessage} ${
-                msg.sender === "You" ? styles.userMessage : styles.botMessage
-              }`}
-            >
-              <strong>{msg.sender}:</strong> {msg.text}
-            </div>
-          ))}
 
-          {/* 타이핑 중 메시지 표시 */}
-          {isTyping && (
-            <div className={styles.chatMessage}>
-              <strong>Bot:</strong> <span className={styles.typing}>...</span>
-            </div>
-          )}
-        </div>
-        <div className={styles.chatInput}>
-          <input
-            type="text"
-            placeholder="처음 이용시 '도움'을 입력하세요"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)} // 메시지 입력
-          />
-          <button onClick={sendMessageToBackend}>Send</button>
-        </div>
-      </div>
+        <div className={`${styles.chatContainer} ${isOpen ? styles.open : ""}`}>
+          <div className={styles.chatHeader}>
+            <h2>도우미 봇</h2>
+            <button onClick={toggleChatWindow} className={styles.closeBtn}>
+              X
+            </button>
+          </div>
+          <div className={styles.chatBody}>
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`${styles.chatMessage} ${
+                  msg.sender === "You" ? styles.userMessage : styles.botMessage
+                }`}
+              >
+                <strong>{msg.sender}:</strong> {msg.text}
+              </div>
+            ))}
 
-      <div className={styles.chatIcon} onClick={toggleChatWindow}>
-        💬
+            {/* 타이핑 중 메시지 표시 */}
+            {isTyping && (
+              <div className={styles.chatMessage}>
+                <strong>Bot:</strong> <span className={styles.typing}>...</span>
+              </div>
+            )}
+          </div>
+          <div className={styles.chatInput}>
+            <input
+              type="text"
+              placeholder="처음 이용시 '도움'을 입력하세요"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)} // 메시지 입력
+            />
+            <button onClick={sendMessageToBackend}>Send</button>
+          </div>
+        </div>
+
+        <div className={styles.chatIcon} onClick={toggleChatWindow}>
+          💬
+        </div>
       </div>
     </div>
   );

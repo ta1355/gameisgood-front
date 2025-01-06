@@ -10,7 +10,7 @@ function Posts({
   likeCount,
   viewCount,
   image,
-  user,
+  username,
   comments,
   game,
 }) {
@@ -41,7 +41,8 @@ function Posts({
         <span>작성일: {formattedDate}</span>
         {formattedDeletedDate && <span>삭제일: {formattedDeletedDate}</span>}
         <span>
-          작성자: {user === "없음" || !user ? "없음" : user || "정보 없음"}
+          작성자:{" "}
+          {username === "없음" || !username ? "없음" : username || "정보 없음"}
         </span>
       </div>
     </div>

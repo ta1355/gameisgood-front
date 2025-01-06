@@ -5,10 +5,16 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #34495e; /* 기존 박스 색상 */
+  color: #ecf0f1; /* 텍스트 색상 */
 }
 
 .App {
   position: relative;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #34495e; /* 기존 박스 색상 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* 도우미 봇 모달 관련 스타일 */
@@ -73,7 +79,7 @@ body {
   flex-grow: 1;
   padding: 10px;
   font-size: 1rem;
-  background-color: #34495e;
+  background-color: #434547; /* 기존 배경 색상 */
   color: #ecf0f1;
   border: 1px solid #5f6b72;
   border-radius: 5px;
@@ -140,8 +146,8 @@ body {
 .popularPostsSection {
   padding: 20px;
   margin: 20px;
-  background-color: #2c3e50;
-  color: #fff;
+  background-color: #434547; /* 기존 배경 색상 */
+  color: #ecf0f1;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -160,7 +166,7 @@ body {
 
 .popularPostItem {
   padding: 20px;
-  background-color: #34495e;
+  background-color: #565657; /* 기존 배경 색상 */
   color: #ecf0f1;
   border: 1px solid #5f6b72;
   border-radius: 6px;
@@ -203,8 +209,8 @@ body {
 .gamesSection {
   padding: 20px;
   margin: 20px;
-  background-color: #2c3e50;
-  color: #fff;
+  background-color: #434547; /* 기존 배경 색상 */
+  color: #ecf0f1;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -225,7 +231,7 @@ body {
   display: flex;
   align-items: center;
   padding: 20px;
-  background-color: #34495e;
+  background-color: #565657; /* 기존 배경 색상 */
   color: #ecf0f1;
   border: 1px solid #5f6b72;
   border-radius: 6px;
@@ -256,4 +262,89 @@ body {
 .gamePrice {
   font-size: 1rem;
   color: #bdc3c7;
+}
+
+/* 인기 게임 리스트 섹션 스타일 */
+.topSellersSection {
+  padding: 20px;
+  margin: 20px;
+  background-color: #434547; /* 기존 배경 색상 */
+  color: #ecf0f1;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.topSellersSection h2 {
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  font-size: 1.5rem;
+}
+
+.topSellersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* 게시글 리스트 섹션 스타일 */
+.postsSection {
+  padding: 20px;
+  margin: 20px;
+  background-color: #434547; /* 기존 배경 색상 */
+  color: #ecf0f1;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.postsSection h2 {
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  font-size: 1.5rem;
+}
+
+.postsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.postItem {
+  padding: 20px;
+  background-color: #565657; /* 기존 배경 색상 */
+  color: #ecf0f1;
+  border: 1px solid #5f6b72;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.postItem:hover {
+  background-color: #3b4a58;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.postTitle {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #ecf0f1;
+}
+
+.postInfo {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+  color: #bdc3c7;
+}
+
+.postAuthor {
+  font-weight: 500;
+}
+
+.postDate {
+  color: #bdc3c7;
+}
+
+.viewCount {
+  color: #3498db;
 }
