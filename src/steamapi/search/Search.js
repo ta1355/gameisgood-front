@@ -15,7 +15,6 @@ function Search() {
         `http://localhost:8080/search/${steamAppName}`
       );
       const json = await response.json();
-      console.log(json);
       setGame(json);
       setLoading(false);
     } catch (error) {

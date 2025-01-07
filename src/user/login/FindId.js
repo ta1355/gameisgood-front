@@ -54,42 +54,44 @@ function FindId() {
   };
 
   return (
-    <div className={styles.findIdContainer}>
-      <h2>아이디 찾기</h2>
-      <form onSubmit={handleSubmit} className={styles.findIdForm}>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">이메일</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="가입시 등록한 이메일을 입력하세요"
-          />
-        </div>
-
-        {message && (
-          <div
-            className={`${styles.message} ${
-              message.includes("실패") || message.includes("오류")
-                ? styles.error
-                : styles.success
-            }`}
-          >
-            {message}
+    <div className={styles.findIdBody}>
+      <div className={styles.findIdContainer}>
+        <h2 className={styles.findIdTitle}>아이디 찾기</h2>
+        <form onSubmit={handleSubmit} className={styles.findIdForm}>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">이메일</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="가입시 등록한 이메일을 입력하세요"
+            />
           </div>
-        )}
 
-        <div className={styles.buttonGroup}>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "처리 중..." : "아이디 찾기"}
-          </button>
-          <button type="button" onClick={handleBackToLogin}>
-            로그인으로 돌아가기
-          </button>
-        </div>
-      </form>
+          {message && (
+            <div
+              className={`${styles.message} ${
+                message.includes("실패") || message.includes("오류")
+                  ? styles.error
+                  : styles.success
+              }`}
+            >
+              {message}
+            </div>
+          )}
+
+          <div className={styles.buttonGroup}>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "처리 중..." : "아이디 찾기"}
+            </button>
+            <button type="button" onClick={handleBackToLogin}>
+              로그인으로 돌아가기
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

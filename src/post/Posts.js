@@ -33,7 +33,6 @@ function Posts({
   return (
     <div className={styles.post} onClick={handleTitleClick}>
       <h2>{title}</h2>
-      <p>{detail}</p>
       <div className={styles.postInfo}>
         <span>게임: {game}</span>
         <span>추천수: {likeCount}</span>

@@ -52,7 +52,7 @@ function ChangePassword() {
 
   return (
     <div className={styles.changePasswordContainer}>
-      <h2>비밀번호 변경</h2>
+      <h2 className={styles.changePasswordH2}>비밀번호 변경</h2>
       <form onSubmit={handleSubmit} className={styles.changePasswordForm}>
         <div className={styles.formGroup}>
           <label htmlFor="username">사용자명</label>

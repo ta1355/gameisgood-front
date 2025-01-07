@@ -1,0 +1,137 @@
+/* LoginForm.module.css */
+
+/* 기본 설정 */
+.loginFormBody {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #ecf0f1; /* 텍스트 색상 */
+}
+
+.loginFormContainer {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #434547; /* 기존 배경 색상 */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.loginFormTitle {
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  text-align: center;
+}
+
+.loginFormGroup {
+  margin-bottom: 20px;
+}
+
+.loginFormLabel {
+  display: block;
+  margin-bottom: 5px;
+  color: #ecf0f1;
+}
+
+.loginFormInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #565657; /* 기존 배경 색상 */
+  color: #ecf0f1;
+  border: 1px solid #5f6b72;
+  border-radius: 5px;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.loginFormInput:focus {
+  border-color: #2980b9;
+  background-color: #3b4a58;
+  outline: none;
+}
+
+.loginFormButton {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-bottom: 15px;
+}
+
+.loginFormButton:hover {
+  background-color: #3498db;
+  transform: scale(1.05);
+}
+
+.loginFormButton:active {
+  transform: scale(1);
+}
+
+.loginFormErrorMessage {
+  color: #e74c3c;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loginFormGoogleLogin {
+  margin-top: 20px;
+}
+
+.loginFormGoogleLoginButton {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #db4437;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.loginFormGoogleLoginButton:hover {
+  background-color: #c23321;
+  transform: scale(1.05);
+}
+
+.loginFormGoogleLoginButton:active {
+  transform: scale(1);
+}
+
+.loginFormGoogleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.loginFormOtherLogin {
+  margin-top: 20px;
+  text-align: center;
+  color: #ecf0f1;
+}
+
+.loginFormLinks {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.loginFormLinkButton {
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.loginFormLinkButton:hover {
+  color: #2980b9;
+}
