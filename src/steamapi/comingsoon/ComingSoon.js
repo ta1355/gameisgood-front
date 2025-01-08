@@ -11,7 +11,6 @@ function Game() {
       const response = await fetch(`http://localhost:8080/game/coming_soon`);
       const json = await response.json();
 
-      console.log(json);
       setGame(json.specials);
       setLoading(false);
     } catch (error) {

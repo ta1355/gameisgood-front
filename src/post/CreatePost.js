@@ -60,7 +60,6 @@ function CreatePost() {
 
     // 로컬 스토리지에서 JWT 토큰을 가져옴
     const token = localStorage.getItem("jwtToken");
-    console.log(token);
 
     try {
       const response = await fetch("http://localhost:8080/createpost", {

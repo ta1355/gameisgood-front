@@ -24,7 +24,6 @@ function Main() {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log("Received popular posts:", data); // 데이터 확인용 로그
           setPopularPosts(data);
         } else {
           console.error("인기 게시글을 불러오는데 실패했습니다.");
@@ -100,7 +99,6 @@ function Main() {
 
   // 게시글 클릭 핸들러
   const handlePostClick = (postId) => {
-    console.log("Clicked post ID:", postId); // ID 확인용 로그
     if (postId) {
       // ID가 있는 경우에만 네비게이트
       navigate(`/post/${postId}`);
@@ -111,7 +109,6 @@ function Main() {
 
   // 게임 클릭 핸들러
   const handleGameClick = (steamAppId) => {
-    console.log("Clicked game ID:", steamAppId); // ID 확인용 로그
     if (steamAppId) {
       // ID가 있는 경우에만 네비게이트
       navigate(`/game_detail/${steamAppId}`);
