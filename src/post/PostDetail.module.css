@@ -61,6 +61,14 @@
   margin-bottom: 20px;
 }
 
+/* 작성자 정보 */
+.author {
+  font-size: 1rem;
+  color: #bdc3c7; /* 연한 회색 */
+  text-align: left; /* 왼쪽 정렬 */
+  margin-bottom: 20px;
+}
+
 /* 이미지 영역 */
 .imageSection {
   background-color: #434547; /* 이미지가 포함된 영역 */
@@ -153,4 +161,72 @@
 
 .deleteButton:hover {
   background-color: #c0392b; /* 어두운 빨간색 */
+}
+
+/* 댓글 섹션 */
+.commentSection {
+  margin-top: 40px;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.commentForm textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #5f6b72;
+  background-color: #565657;
+  color: #ecf0f1;
+  font-size: 1rem;
+  resize: none;
+}
+
+.commentForm button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.commentForm button:hover {
+  background-color: #3498db;
+}
+
+.comment {
+  background-color: #434547;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.comment p {
+  margin: 5px 0;
+  color: #ecf0f1;
+}
+
+.comment .commentAuthor {
+  font-weight: bold;
+  color: #bdc3c7;
+}
+
+.comment .commentDate {
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+/* 댓글이 없습니다 텍스트 스타일 */
+.noComments {
+  font-size: 1.1rem;
+  color: #bdc3c7; /* 연한 회색 */
+  text-align: center; /* 중앙 정렬 */
+  margin-top: 20px;
 }

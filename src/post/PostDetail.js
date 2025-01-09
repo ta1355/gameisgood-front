@@ -190,6 +190,7 @@ function Detail() {
           <p className={styles.createDate}>
             작성일: {new Date(post.createDateTime).toLocaleString()}
           </p>
+          <p className={styles.author}>작성자: {post.username}</p>
           <p className={styles.viewCount}>조회수: {post.viewCount}</p>
           {currentUser === post.username && (
             <button onClick={handleDelete} className={styles.deleteButton}>
@@ -222,26 +223,32 @@ function Detail() {
           </button>
         </div>
 
-        <h2>댓글</h2>
-        <form onSubmit={handleCommentSubmit}>
-          <textarea
-            value={newComment}
-            onChange={handleCommentChange}
-            placeholder="댓글을 입력하세요"
-          />
-          <button type="submit">댓글 작성</button>
-        </form>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div key={comment.id} className={styles.comment}>
-              <p>{comment.detail}</p>
-              <p>작성자: {comment.username}</p>
-              <p>{new Date(comment.createDateTime).toLocaleString()}</p>
-            </div>
-          ))
-        ) : (
-          <p>댓글이 없습니다.</p>
-        )}
+        <div className={styles.commentSection}>
+          <h2>댓글</h2>
+          <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
+            <textarea
+              value={newComment}
+              onChange={handleCommentChange}
+              placeholder="댓글을 입력하세요"
+            />
+            <button type="submit">댓글 작성</button>
+          </form>
+          {comments.length > 0 ? (
+            comments.map((comment) => (
+              <div key={comment.id} className={styles.comment}>
+                <p>{comment.detail}</p>
+                <p className={styles.commentAuthor}>
+                  작성자: {comment.username}
+                </p>
+                <p className={styles.commentDate}>
+                  {new Date(comment.createDateTime).toLocaleString()}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className={styles.noComments}>댓글이 없습니다.</p>
+          )}
+        </div>
       </div>
     </div>
   );
