@@ -17,6 +17,7 @@ import LoginForm from "./user/login/LoginForm";
 import Main from "./mainpage/main";
 import FindId from "./user/login/FindId";
 import ChangePassword from "./user/login/ChangePassword";
+import ModifyPost from "./post/ModifyPost";
 import "./App.css";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/find-id" element={<FindId />} />
           <Route path="post/:id" element={<PostDetail />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/post/:id/modify" element={<ModifyPost />} />
         </Routes>
         <Footer></Footer>
       </Router>

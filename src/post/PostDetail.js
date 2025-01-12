@@ -167,6 +167,10 @@ function Detail() {
     }
   };
 
+  const handleEdit = () => {
+    navigate(`/post/${id}/modify`);
+  };
+
   useEffect(() => {
     if (id) {
       getPost();
@@ -193,9 +197,14 @@ function Detail() {
           <p className={styles.author}>작성자: {post.username}</p>
           <p className={styles.viewCount}>조회수: {post.viewCount}</p>
           {currentUser === post.username && (
-            <button onClick={handleDelete} className={styles.deleteButton}>
-              삭제
-            </button>
+            <div className={styles.buttonContainer}>
+              <button onClick={handleEdit} className={styles.editButton}>
+                수정
+              </button>
+              <button onClick={handleDelete} className={styles.deleteButton}>
+                삭제
+              </button>
+            </div>
           )}
         </div>
 
@@ -224,14 +233,16 @@ function Detail() {
         </div>
 
         <div className={styles.commentSection}>
-          <h2>댓글</h2>
           <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
             <textarea
               value={newComment}
               onChange={handleCommentChange}
               placeholder="댓글을 입력하세요"
+              className={styles.commentTextarea}
             />
-            <button type="submit">댓글 작성</button>
+            <button type="submit" className={styles.commentButton}>
+              댓글 작성
+            </button>
           </form>
           {comments.length > 0 ? (
             comments.map((comment) => (

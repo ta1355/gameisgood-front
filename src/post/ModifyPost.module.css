@@ -1,0 +1,84 @@
+/* 전체 폼 컨테이너 */
+.createPostContainer {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #2c3e50; /* 어두운 배경 */
+  color: #fff; /* 텍스트 색상 */
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 부드러운 그림자 */
+  min-height: 100vh;
+}
+
+/* 제목 입력 폼 */
+.createPostForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 각 입력 요소 간의 간격 */
+  margin-top: 20px;
+}
+
+/* 라벨 스타일 */
+.createPostForm label {
+  font-size: 1.2rem;
+  color: #ecf0f1; /* 흰색 라벨 */
+  margin-bottom: 5px;
+}
+
+/* 제목 입력창 */
+.createPostForm input,
+.createPostForm textarea {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #34495e; /* 어두운 회색 입력창 */
+  color: #ecf0f1; /* 흰색 텍스트 */
+  border: 1px solid #5f6b72;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* 포커스 되었을 때 스타일 */
+.createPostForm input:focus,
+.createPostForm textarea:focus {
+  border-color: #2980b9; /* 파란색으로 테두리 강조 */
+  background-color: #3b4a58; /* 입력창 배경 색상 */
+  outline: none; /* 기본 포커스 스타일 제거 */
+}
+
+/* 텍스트 에어리어 스타일 (내용) */
+.createPostForm textarea {
+  resize: vertical; /* 세로로 크기 조절 가능 */
+  min-height: 150px;
+}
+
+/* 버튼 스타일 */
+.createPostForm button {
+  padding: 12px 20px;
+  background-color: #2980b9; /* 파란색 버튼 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* 버튼 호버 효과 */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* 버튼 호버 및 클릭 스타일 */
+.createPostForm button:hover {
+  background-color: #3498db;
+  transform: scale(1.05);
+}
+
+.createPostForm button:active {
+  transform: scale(1);
+}
+
+/* 폼 입력창의 placeholder 스타일 */
+.createPostForm input::placeholder,
+.createPostForm textarea::placeholder {
+  color: #bdc3c7; /* 연한 회색 */
+  font-style: italic;
+}
