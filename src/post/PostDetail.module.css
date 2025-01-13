@@ -245,6 +245,23 @@
   color: #95a5a6;
 }
 
+.commentDeleteButton {
+  background-color: #e74c3c; /* 빨간색 배경 */
+  color: #fff; /* 흰색 텍스트 */
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.commentDeleteButton:hover {
+  background-color: #c0392b; /* 어두운 빨간색 */
+}
+
 /* 댓글이 없습니다 텍스트 스타일 */
 .noComments {
   font-size: 1.1rem;

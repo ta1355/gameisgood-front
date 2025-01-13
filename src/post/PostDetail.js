@@ -4,6 +4,7 @@ import styles from "./PostDetail.module.css";
 
 function Detail() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
@@ -11,7 +12,6 @@ function Detail() {
   const [liked, setLiked] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
-  const { id } = useParams();
 
   useEffect(() => {
     const token = localStorage.getItem("jwtToken");
@@ -126,6 +126,7 @@ function Detail() {
           body: JSON.stringify({ detail: newComment }),
         }
       );
+      alert("댓글이 작성되었습니다.");
       if (response.ok) {
         const addedComment = await response.json();
         setComments((prevComments) => [addedComment, ...prevComments]);
@@ -135,6 +136,36 @@ function Detail() {
       }
     } catch (error) {
       setError("댓글 작성 중 오류가 발생했습니다.");
+    }
+  };
+
+  const handleCommentDelete = async (commentId) => {
+    const token = localStorage.getItem("jwtToken");
+    if (!token) {
+      alert("로그인 정보가 없습니다.");
+      return;
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:8080/comments/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        alert("댓글이 삭제되었습니다.");
+        setComments((prevComments) =>
+          prevComments.filter((comment) => comment.indexId !== commentId)
+        );
+      } else {
+        throw new Error("댓글 삭제에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("댓글 삭제 중 오류 발생:", error);
+      setError("댓글 삭제 중 오류가 발생했습니다.");
     }
   };
 
@@ -246,7 +277,7 @@ function Detail() {
           </form>
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <div key={comment.id} className={styles.comment}>
+              <div key={comment.indexId} className={styles.comment}>
                 <p>{comment.detail}</p>
                 <p className={styles.commentAuthor}>
                   작성자: {comment.username}
@@ -254,6 +285,14 @@ function Detail() {
                 <p className={styles.commentDate}>
                   {new Date(comment.createDateTime).toLocaleString()}
                 </p>
+                {currentUser === comment.username && (
+                  <button
+                    onClick={() => handleCommentDelete(comment.indexId)}
+                    className={styles.commentDeleteButton}
+                  >
+                    삭제
+                  </button>
+                )}
               </div>
             ))
           ) : (
